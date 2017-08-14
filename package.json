@@ -1,20 +1,9 @@
 {
-    "name": "webix-admin-app",
-    "version": "0.1.0",
-    "description": "Demo of Admin interface",
+    "name": "sdcloud",
+    "version": "1.0.0",
+    "description": "Example of Webix MVC Admin App ===============================",
     "main": "app.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git@bitbucket.org:xbsltd/webix-admin-app.git"
-    },
-    "keywords": [
-        "webix"
-    ],
-    "author": "Maria Staskova",
-    "license": "SCI",
+    "dependencies": {},
     "devDependencies": {
         "event-stream": "^3.1.7",
         "glob": "^4.0.5",
@@ -28,5 +17,21 @@
         "gulp-uglify": "^0.3.1",
         "gulp-clean": "~0.3.1",
         "gulp-zip": "~2.0.2"
-    }
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pcboby/SDCloud.git"
+    },
+    "keywords": [
+        "SDCloud"
+    ],
+    "author": "SDCloud",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/pcboby/SDCloud/issues"
+    },
+    "homepage": "https://github.com/pcboby/SDCloud#readme"
 }
