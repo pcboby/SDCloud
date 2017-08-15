@@ -12,7 +12,7 @@ define([
             view: "toolbar",
 
             elements: [
-                { view: "label", label: "<a><img class='photo' src='assets/imgs/logo.png' /></a>", width: 200 },
+                { view: "label", label: "<a href='/app/desktop.dashboard'><img class='photo' src='assets/imgs/logo.png' /></a>", width: 200 },
                 { view: "icon", icon: "search", width: 45, popup: "searchPopup" },
                 {},
                 { view: "icon", icon: "envelope-o", value: 3, width: 45, popup: "mailPopup" },
