@@ -76,7 +76,7 @@ gulp.task('index', function() {
             .pipe(replace(/rel\=\"stylesheet\/less\" href=\"(.*?)\.less\"/g, 'rel="stylesheet" href="$1.css"'))
             .pipe(replace(/\.css\"/g, '.css?' + timeVersion + '"'))
             .pipe(replace(/\.js\"/g, '.js?' + timeVersion + '"'))
-            .pipe(replace("require.config", "webix.production = true; require.config"))
+            .pipe(replace("require.config", "webix.production = true; webix.productEdition='" + group + "'; require.config"))
             // .pipe(replace(/\.\.\/webix\/codebase\//g, '//cdn.webix.com/site/'))
             // .pipe(replace(/cdn\.webix\.com\/edge/g, 'cdn.webix.com/site'))
             .pipe(gulp.dest(destPath + group + '/'));

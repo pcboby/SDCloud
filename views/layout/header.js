@@ -24,7 +24,7 @@ define([
                     borderless: true,
 
                     width: 180,
-                    data: { id: 3, name: "Oliver Parr" },
+                    data: { id: 2, name: "Oliver Parr" },
                     template: function(obj) {
                         var html = "<div style='height:100%;width:100%;' onclick='webix.$$(\"profilePopup\").show(this)'>";
                         html += "<img class='photo' src='assets/imgs/photos/" + obj.id + ".png' /><span class='name'>" + obj.name + "</span>";
@@ -39,6 +39,8 @@ define([
             scope.ui(mail.$ui);
             scope.ui(message.$ui);
             scope.ui(profile.$ui);
+
+            console.log('productEdition is:', webix.productEdition);
         }
     };
 
