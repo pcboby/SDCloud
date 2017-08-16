@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "description": "Example of Webix MVC Admin App ===============================",
     "main": "app.js",
-    "dependencies": {},
+    "dependencies": {
+        "run-sequence": "^2.1.0"
+    },
     "devDependencies": {
         "event-stream": "^3.1.7",
         "glob": "^4.0.5",

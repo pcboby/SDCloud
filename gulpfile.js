@@ -11,15 +11,14 @@ var zip = require("gulp-zip");
 var replace = require("gulp-replace");
 var jshint = require("gulp-jshint");
 
+var runSequence = require('run-sequence');
+
 var destPath = './deploy/';
 var groups = ['dev', 'uat', 'sit', 'prod', 'pref'];
 
 function dest(g, path) {
-    // for (var i = 0; i < groups.length; i++) {
-    //     g.pipe(gulp.dest(destPath + groups[i] + '/' + path));
-    // }
-    groups.forEach(function(el) {
-        g.pipe(gulp.dest(destPath + el + '/' + path))
+    groups.forEach(function(group) {
+        g.pipe(gulp.dest(destPath + group + '/' + path))
     })
     return g;
 }
@@ -68,6 +67,24 @@ gulp.task('libs', function() {
         'libs/webix/');
 });
 
+gulp.task('index', function() {
+    var timeVersion = (new Date()) * 1;
+    groups.forEach(function(group) {
+        gulp.src("./index.html")
+            .pipe(replace('data-main="app" src="libs/require.js"', 'src="app.js"'))
+            .pipe(replace('<script type="text/javascript" src="libs/less.min.js"></script>', ''))
+            .pipe(replace(/rel\=\"stylesheet\/less\" href=\"(.*?)\.less\"/g, 'rel="stylesheet" href="$1.css"'))
+            .pipe(replace(/\.css\"/g, '.css?' + timeVersion + '"'))
+            .pipe(replace(/\.js\"/g, '.js?' + timeVersion + '"'))
+            .pipe(replace("require.config", "webix.production = true; require.config"))
+            // .pipe(replace(/\.\.\/webix\/codebase\//g, '//cdn.webix.com/site/'))
+            // .pipe(replace(/cdn\.webix\.com\/edge/g, 'cdn.webix.com/site'))
+            .pipe(gulp.dest(destPath + group + '/'));
+    })
+
+
+})
+
 gulp.task('server', function() {
     dest(gulp.src("./server/**/*.*"),
         'server/');
@@ -77,25 +94,11 @@ gulp.task("clean", function() {
     return gulp.src(destPath + "*", { read: false }).pipe(clean());
 });
 
-gulp.task('build', ["js", "css", "images", "libs", "server"], function() {
-    var build = (new Date()) * 1;
-
-
-    return require('event-stream').merge(
-        //index
-        dest(gulp.src("./index.html")
-            .pipe(replace('data-main="app" src="libs/require.js"', 'src="app.js"'))
-            .pipe(replace('<script type="text/javascript" src="libs/less.min.js"></script>', ''))
-            .pipe(replace(/rel\=\"stylesheet\/less\" href=\"(.*?)\.less\"/g, 'rel="stylesheet" href="$1.css"'))
-            .pipe(replace(/\.css\"/g, '.css?' + build + '"'))
-            .pipe(replace(/\.js\"/g, '.js?' + build + '"'))
-            .pipe(replace("require.config", "webix.production = true; require.config"))
-            .pipe(replace(/\.\.\/webix\/codebase\//g, '//cdn.webix.com/site/'))
-            .pipe(replace(/cdn\.webix\.com\/edge/g, 'cdn.webix.com/site')),
-            '')
-    );
-
+gulp.task('build', ['clean'], function() {
+    runSequence(["js", "css", "images", "libs", "server", "index"]);
 });
+
+gulp.task('default', ['build']);
 
 gulp.task("sources", function() {
     gulp.src(["assets/**/*", "helpers/**/*", "libs/**/*", "models/**/*", "server/**/*", "views/**/*", "index.html", "app.js", "package.json"], { base: './' })
