@@ -42,8 +42,8 @@ define(function() {
                     value: "System",
                     open: true,
                     data: [
-                        { id: "users", value: "Users", icon: "check-square-o", $css: "users", details: "users manager" },
-                        { id: "roles", value: "Roles", icon: "check-square-o", $css: "roles", details: "roles manager" }
+                        { id: "system.users.index", value: "Users", icon: "check-square-o", $css: "users", details: "users manager" },
+                        { id: "system.roles.index", value: "Roles", icon: "check-square-o", $css: "roles", details: "roles manager" }
                     ]
                 }, {
                     id: "config",
