@@ -1,7 +1,8 @@
 define([], function() {
 
-    var default_lang = "";
-    var key = ":app:lang";
+    var default_lang = "",
+        current_lang = "";
+    var key = ":lang";
 
     function _get_lang() {
 
@@ -11,9 +12,13 @@ define([], function() {
     function _set_lang(lang, init) {
         webix.storage.local.put(key, lang);
         webix.i18n.setLocale(lang);
+        if (current_lang != lang) {
+            document.location.reload();
+        }
     }
 
     function create_locale(lang) {
+        current_lang = lang;
         _set_lang(lang);
     }
 

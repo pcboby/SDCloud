@@ -1,0 +1,30 @@
+.header_lang,
+.header_project {
+    background-color: transparent;
+}
+
+{}
+
+.header_lang .webix_inp_static,
+.header_lang .webix_inp_static:focus {
+    border-radius: 8px;
+    background-color: transparent;
+    border: none;
+    line-height: 42px !important;
+    color: #fff;
+}
+
+.header_project .webix_inp_static,
+.header_project .webix_inp_static:focus {
+    background-color: rgba(0, 0, 0, .1);
+    border: none;
+    line-height: 42px !important;
+    color: #fff;
+}
+
+.header_lang .webix_input_icon,
+.header_lang .webix_input_icon::before,
+.header_project .webix_input_icon,
+.header_project .webix_input_icon::before {
+    color: #fff;
+}
