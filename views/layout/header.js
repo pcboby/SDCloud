@@ -3,8 +3,7 @@ define([
     "views/menus/mail",
     "views/menus/message",
     "views/menus/profile",
-    "views/webix/icon",
-    "views/webix/menutree"
+    "views/webix/icon"
 ], function(search, mail, message, profile) {
 
     return {
@@ -13,8 +12,9 @@ define([
 
             elements: [
                 { view: "label", label: "<a href='/app/desktop.dashboard'><img class='photo' src='assets/imgs/logo.png' /></a>", width: 200 },
-                { view: "icon", icon: "search", width: 45, popup: "searchPopup" },
+                { view: "richselect", label: 'Project:', labelAlign: "right", value: "SDCloud", options: ["SDCloud"] },
                 {},
+                { view: "richselect", value: "中文", options: ["中文", "English"], width: 96 },
                 { view: "icon", icon: "envelope-o", value: 3, width: 45, popup: "mailPopup" },
                 { view: "icon", icon: "comments-o", value: 5, width: 45, popup: "messagePopup" },
                 {
@@ -40,7 +40,6 @@ define([
             scope.ui(message.$ui);
             scope.ui(profile.$ui);
 
-            console.log('productEdition is:', webix.productEdition);
         }
     };
 

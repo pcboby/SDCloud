@@ -9,7 +9,7 @@ define(function() {
             height: 40,
             cols: [{
                     view: "pager",
-                    id: "pager",
+                    id: "pagation",
                     template: "{common.first()}{common.prev()}&nbsp; {common.pages()}&nbsp; {common.next()}{common.last()}",
                     // autosize: true,
                     height: 35,

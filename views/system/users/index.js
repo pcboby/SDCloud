@@ -1,9 +1,9 @@
 define([
-    "tpls/model.pager",
+    "tpls/model.pagation",
     "tpls/model.export",
     "./index.add",
     "models/orders"
-], function(pager, exports, userAdd, datas) {
+], function(pagation, exports, userAdd, datas) {
 
 
     var search = [{
@@ -13,70 +13,64 @@ define([
         id: "userSearch",
         elements: [{
                 cols: [{
-                        view: "combo",
-                        name: "product",
-                        label: "Product",
-                        options: [
-                            { id: 1, value: "Webix Chai" },
-                            { id: 2, value: "Webix Syrup" },
-                            { id: 3, value: "Webix Cajun Seasoning" },
-                            { id: 4, value: "Webix Olive Oil" },
-                            { id: 5, value: "Webix Boysenberry Spread" },
-                            { id: 6, value: "Webix Dried Pears" },
-                            { id: 7, value: "Webix Curry Sauce" },
-                            { id: 8, value: "Webix Walnuts" },
-                            { id: 9, value: "Webix Fruit Cocktail" },
-                            { id: 10, value: "Webix Chocolate Biscuits Mix" },
-                            { id: 11, value: "Webix Marmalade" },
-                            { id: 12, value: "Webix Scones" },
-                            { id: 13, value: "Webix Beer" },
-                            { id: 14, value: "Webix Crab Meat" },
-                            { id: 15, value: "Webix Clam Chowder" },
-                            { id: 16, value: "Webix Coffee" },
-                            { id: 17, value: "Webix Chocolate" }
-                        ]
-                    },
-                    {
-                        view: "combo",
-                        name: "shipment",
-                        label: "Shipping Company",
-                        options: ["Shipping A",
-                            "Shipping B",
-                            "Shipping C",
-                            "Shipping D",
-                            "Shipping E",
-                            "Shipping F",
-                            "Shipping G"
-                        ]
-                    },
-                    {
-                        view: "datepicker",
-                        label: "Order Date",
-                        value: new Date(),
-                        format: "%d  %M %Y"
-                    }
-                ]
+                    view: "combo",
+                    name: "product",
+                    label: "Product",
+                    options: [
+                        { id: 1, value: "Webix Chai" },
+                        { id: 2, value: "Webix Syrup" },
+                        { id: 3, value: "Webix Cajun Seasoning" },
+                        { id: 4, value: "Webix Olive Oil" },
+                        { id: 5, value: "Webix Boysenberry Spread" },
+                        { id: 6, value: "Webix Dried Pears" },
+                        { id: 7, value: "Webix Curry Sauce" },
+                        { id: 8, value: "Webix Walnuts" },
+                        { id: 9, value: "Webix Fruit Cocktail" },
+                        { id: 10, value: "Webix Chocolate Biscuits Mix" },
+                        { id: 11, value: "Webix Marmalade" },
+                        { id: 12, value: "Webix Scones" },
+                        { id: 13, value: "Webix Beer" },
+                        { id: 14, value: "Webix Crab Meat" },
+                        { id: 15, value: "Webix Clam Chowder" },
+                        { id: 16, value: "Webix Coffee" },
+                        { id: 17, value: "Webix Chocolate" }
+                    ]
+                }, {
+                    view: "combo",
+                    name: "shipment",
+                    label: "Shipping Company",
+                    options: [
+                        "Shipping A",
+                        "Shipping B",
+                        "Shipping C",
+                        "Shipping D",
+                        "Shipping E",
+                        "Shipping F",
+                        "Shipping G"
+                    ]
+                }, {
+                    view: "datepicker",
+                    label: "Order Date",
+                    value: new Date()
+                }]
             },
             {
                 margin: 10,
                 cols: [
-                    {},
-                    {
+                    {}, {
                         view: "button",
                         label: "Search",
+                        align: "center",
+                        width: 120,
+                        click: function() {}
+                    }, {
+                        view: "button",
+                        label: "Reset",
                         type: "form",
                         align: "center",
                         width: 120,
                         click: function() {}
-                    },
-                    {
-                        view: "button",
-                        label: "Reset",
-                        align: "center",
-                        width: 120,
-                        click: function() {}
-                    },
-                    {}
+                    }, {}
                 ]
             }
 
@@ -156,7 +150,7 @@ define([
                     this.select(4);
                 }
             },
-            pager: "pager",
+            pager: "pagation",
             data: datas.getAll,
             onClick: {
                 webix_icon: function(e, id, node) {
@@ -186,7 +180,7 @@ define([
                 cols: btns
             },
             {
-                rows: [grid, pager]
+                rows: [grid, pagation]
             }
 
 

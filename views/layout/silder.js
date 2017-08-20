@@ -1,4 +1,6 @@
-define(function() {
+define([
+    "views/webix/menutree"
+], function() {
 
     return {
         $ui: {
