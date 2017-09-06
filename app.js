@@ -6,7 +6,8 @@ define([
     "libs/core",
     "helpers/config",
     "helpers/menu",
-    "helpers/locale"
+    "helpers/locale",
+    "helpers/Untils"
 ], function(core, config, menu, locale) {
 
 
@@ -17,7 +18,11 @@ define([
     if (!webix.env.touch && webix.ui.scrollSize && webix.CustomScroll)
         webix.CustomScroll.init();
 
+    webix.ajax().get('api/data.project.json', function(res, rea) {
+        console.log('this.loaded', rea.json());
+    });
 
+    console.log('Untils.isReady', Untils.version);
     //configuration
     var app = core.create(config);
 

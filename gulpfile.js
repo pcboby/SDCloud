@@ -13,13 +13,16 @@ var jshint = require("gulp-jshint");
 
 var runSequence = require('run-sequence');
 
+var version = '1.0';
 var destPath = './deploy/';
 var groups = ['dev', 'uat', 'sit', 'prod', 'pref'];
 
 function dest(g, path) {
     groups.forEach(function(group) {
-        g.pipe(gulp.dest(destPath + group + '/' + path))
-    })
+        g.pipe(replace('@VERSION', version))
+            .pipe(replace('@ENVIRONMENT', group))
+            .pipe(gulp.dest(destPath + group + '/' + path));
+    });
     return g;
 }
 
@@ -61,6 +64,10 @@ gulp.task('images', function() {
     dest(gulp.src("./assets/imgs/**/*.*"),
         'assets/imgs/');
 });
+gulp.task('api', function() {
+    dest(gulp.src("./api/**/*.*"),
+        'api/');
+});
 
 gulp.task('libs', function() {
     dest(gulp.src("./libs/webix/**/*.*"),
@@ -76,14 +83,12 @@ gulp.task('index', function() {
             .pipe(replace(/rel\=\"stylesheet\/less\" href=\"(.*?)\.less\"/g, 'rel="stylesheet" href="$1.css"'))
             .pipe(replace(/\.css\"/g, '.css?' + timeVersion + '"'))
             .pipe(replace(/\.js\"/g, '.js?' + timeVersion + '"'))
-            .pipe(replace("require.config", "webix.production = true; webix.productEdition='" + group + "'; require.config"))
+            .pipe(replace("require.config", "webix.production = true; require.config"))
             // .pipe(replace(/\.\.\/webix\/codebase\//g, '//cdn.webix.com/site/'))
             // .pipe(replace(/cdn\.webix\.com\/edge/g, 'cdn.webix.com/site'))
             .pipe(gulp.dest(destPath + group + '/'));
-    })
-
-
-})
+    });
+});
 
 gulp.task('server', function() {
     dest(gulp.src("./server/**/*.*"),
@@ -95,7 +100,7 @@ gulp.task("clean", function() {
 });
 
 gulp.task('build', ['clean'], function() {
-    runSequence(["js", "css", "images", "libs", "server", "index"]);
+    runSequence(["js", "css", "images", "api", "libs", "server", "index"]);
 });
 
 gulp.task('default', ['build']);

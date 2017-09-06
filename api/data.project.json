@@ -1,0 +1,20 @@
+{
+    "totals": "4",
+    "data": [{
+        "id": "1",
+        "name": "SDCloud",
+        "lang": "zh-CN"
+    }, {
+        "id": "2",
+        "name": "HRC",
+        "lang": "zh-CN"
+    }, {
+        "id": "3",
+        "name": "HRMS",
+        "lang": "zh-CN"
+    }, {
+        "id": "4",
+        "name": "iJob",
+        "lang": "zh-CN"
+    }]
+}
