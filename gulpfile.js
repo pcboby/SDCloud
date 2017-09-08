@@ -19,9 +19,13 @@ var groups = ['dev', 'uat', 'sit', 'prod', 'pref'];
 
 function dest(g, path) {
     groups.forEach(function(group) {
-        g.pipe(replace('@VERSION', version))
-            .pipe(replace('@ENVIRONMENT', group))
-            .pipe(gulp.dest(destPath + group + '/' + path));
+        if (path === '') { //修正根目录下的字段
+            g.pipe(replace('@ENVIRONMENT', group))
+                .pipe(gulp.dest(destPath + group + '/'));
+
+        } else {
+            g.pipe(gulp.dest(destPath + group + '/' + path));
+        }
     });
     return g;
 }
@@ -54,6 +58,7 @@ gulp.task('js', function() {
             deps: ["app"],
             include: ["libs/almond.js"].concat(views).concat(locales)
         })
+        .pipe(replace('@VERSION', version))
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write("./")),
